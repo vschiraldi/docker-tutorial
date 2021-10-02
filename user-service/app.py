@@ -4,11 +4,12 @@ from flask import Flask, request, jsonify as jsonify_old
 from json import load
 from requests import post
 
-app = Flask(__name__)
-
 
 LOGGING_URL = os.getenv('LOGGING_URL')
 USERS_FILE = 'data/users.json'
+
+
+app = Flask(__name__)
 
 
 class User:
@@ -49,6 +50,11 @@ def get_user(user_id):
         user = matching_users[0]
         send_log(request.path, 200, str(user))
         return jsonify(user)
+
+
+@app.route('/favicon.ico')
+def get_favicon():
+    return "I'm a teapot", 418
 
 
 @app.route('/', defaults={'path': ''})
