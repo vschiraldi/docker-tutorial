@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+
+  user-service:
+    image: orbyta/docker-tutorial/user-service:1.0.0
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./user-service/data:/app/data:ro
+    environment:
+      - "LOGGING_URL=http://logger-service:5000/log"
+
+  logger-service:
+    image: orbyta/docker-tutorial/logger-service:1.0.0
+    ports:
+      - "5002:5000"
+    volumes:
+      - ./logger-service/data:/app/data
+
+
+
+
+
+
