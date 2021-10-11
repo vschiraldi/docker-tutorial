@@ -4,17 +4,24 @@ services:
 
   user-service:
     image: user-service:1.0.0
+    container_name: user-service
     ports:
-      - "5001:5000"
+      - "80:5000"
+    networks:
+      - my-private-network
     volumes:
-      - ./user-service/data:/app/data:ro
+      - ./user-service/data:/app/data
     environment:
       - "LOGGING_URL=http://logger-service:5000/log"
 
   logger-service:
     image: logger-service:1.0.0
-    ports:
-      - "5002:5000"
+    container_name: logger-service
+    networks:
+      - my-private-network
     volumes:
       - ./logger-service/data:/app/data
 
+networks:
+  my-private-network:
+    name: my-private-network
