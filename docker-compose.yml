@@ -12,6 +12,8 @@ services:
       - "LOGGING_URL=http://logger-service:5000/log"
 
   logger-service:
-    image: logger-service:1.0.0
+    image: logger-service:1.0.1
+    ports:
+      - "4000:5000"
     volumes:
       - ./logger-service/data:/app/data

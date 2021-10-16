@@ -1,9 +1,14 @@
-from flask import Flask, request
+from flask import Flask, request, send_file
 
 app = Flask(__name__)
 
 
 LOG_FILE = 'data/log.txt'
+
+
+@app.get('/logs')
+def get_logs():
+    return send_file(LOG_FILE, mimetype='text/plain')
 
 
 @app.post('/log')
